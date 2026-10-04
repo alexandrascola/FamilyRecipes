@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "First Blog Post",
+    "body": "This is the first post in my MicroBlog, dated September 23, 2026. Test.",
+    "createdUtc": "2026-09-24T00:27:09.848928Z"
+  },
+  {
+    "id": 2,
+    "title": "ASP.NET MVC",
+    "body": "MVC vs other layouts. Which is the best?",
+    "createdUtc": "2026-09-24T00:41:42.1758723Z"
+  },
+  {
+    "id": 3,
+    "title": "Invictus",
+    "body": "Out of the night that covers me,\r\n      Black as the pit from pole to pole,\r\nI thank whatever gods may be\r\n      For my unconquerable soul.\r\n\r\nIn the fell clutch of circumstance\r\n      I have not winced nor cried aloud.\r\nUnder the bludgeonings of chance\r\n      My head is bloody, but unbowed.\r\n\r\nBeyond this place of wrath and tears\r\n      Looms but the Horror of the shade,\r\nAnd yet the menace of the years\r\n      Finds and shall find me unafraid.\r\n\r\nIt matters not how strait the gate,\r\n      How charged with punishments the scroll,\r\nI am the master of my fate,\r\n      I am the captain of my soul.",
+    "createdUtc": "2026-09-24T00:44:58.8391824Z"
+  },
+  {
+    "id": 4,
+    "title": "Json blog post",
+    "body": "This will survive until assignment next time",
+    "createdUtc": "2026-09-30T23:42:06.5674064Z"
+  }
+]
