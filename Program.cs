@@ -46,4 +46,10 @@ app.MapGet("/health", () =>
     });
 });
 
+//API endpoint return all recipes as JSON
+app.MapGet("/api/recipes", (IRecipeRepository repo) =>
+{
+    return Results.Json(repo.GetAll());
+});
+
 app.Run();
