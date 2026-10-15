@@ -1,5 +1,6 @@
 using FamilyRecipes.Services;
 using FamilyRecipes.Options;
+using FamilyRecipes.Middleware;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,8 @@ builder.Services.AddSingleton<IRecipeRepository, JsonRecipeRepository>(); //stor
 //Bind SiteOptions from configuration
 builder.Services.Configure<SiteOptions>(builder.Configuration.GetSection("SiteOptions"));
 var app = builder.Build();
+//Log incoming requests to a local file
+app.UseMiddleware<RequestLoggingMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
