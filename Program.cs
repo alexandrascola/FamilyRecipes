@@ -1,4 +1,6 @@
 using FamilyRecipes.Services;
+using FamilyRecipes.Options;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,8 @@ builder.Services.AddRazorPages();
 builder.Services.AddSingleton<IRecipeRepository, JsonRecipeRepository>(); //stores in a JSON file, will persist when app is restarted
 //builder.Services.AddSingleton<IRecipeRepository, InMemoryRecipeRepository>(); //stores in RAM memory, will be lost when app is restarted (UNCOMMENT TO USE THIS REPO)
 
+//Bind SiteOptions from configuration
+builder.Services.Configure<SiteOptions>(builder.Configuration.GetSection("SiteOptions"));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
