@@ -36,4 +36,14 @@ app.MapStaticAssets();
 app.MapRazorPages()
    .WithStaticAssets();
 
+//Health endpoint returns the app version/status
+app.MapGet("/health", () =>
+{
+    return Results.Json(new
+    {
+        version = "1.0.0",
+        status = "Healthy"
+    });
+});
+
 app.Run();
