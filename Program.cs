@@ -6,8 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 
 //Choose which repo to use by swapping the type
-builder.Services.AddSingleton<IBlogRepository, JsonBlogRepository>();
-//builder.Services.AddSingleton<IBlogRepository, InMemoryBlogRepository>();
+builder.Services.AddSingleton<IRecipeRepository, JsonRecipeRepository>(); //stores in a JSON file, will persist when app is restarted
+//builder.Services.AddSingleton<IRecipeRepository, InMemoryRecipeRepository>(); //stores in RAM memory, will be lost when app is restarted (UNCOMMENT TO USE THIS REPO)
 
 var app = builder.Build();
 

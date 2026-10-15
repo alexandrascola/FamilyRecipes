@@ -1,24 +1,29 @@
 ﻿@page "{id:int}"
 @model FamilyRecipes.Pages.DetailsModel
 @{
-    ViewData["Title"] = Model.Post.Title ?? "Post";   
+    ViewData["Title"] = Model.Recipe?.Name ?? "Recipe";   
 }
 
-@if (Model.Post is null)
+@if (Model.Recipe is null)
 {
-    <p>Post Not Found.</p>
+    <p>Recipe Not Found.</p>
 }
 else
 {
-    <article calss="post">
-        <h1>@Model.Post.Title</h1>
-        <p class="meta">@Model.Post.CreatedUtc.ToLocalTime()</p>
-        <div class="body">
-            @Model.Post.Body
+    <article class="post">
+        <h1>@Model.Recipe.Name</h1>
+        <p class="meta">@Model.Recipe.CreatedUtc.ToLocalTime()</p>
+        
+        <h2>Ingredients</h2>
+        <div>
+            @Model.Recipe.Ingredients
+        </div>
+
+        <h2>Instructions</h2>
+        <div>
+            @Model.Recipe.Instructions
         </div>
 
         <p><a asp-page="/Index">Back to List</a></p>
-
     </article>
 }
-

@@ -4,18 +4,18 @@
     ViewData["Title"] = "Home page";
 }
 
-<h1>MicroBlog</h1>
+<h1>Family Recipes</h1>
 
-@if (Model.Posts.Count == 0)
+@if (Model.Recipes.Count == 0)
 {
-    <p>No posts yet. <a asp-page="/Create">Create the first one!</a></p>
+    <p>No recipes yet. <a asp-page="/Create">Create the first one!</a></p>
 }
 else
 {
     <section>
-        @foreach (var post in Model.Posts)
+        @foreach (var recipe in Model.Recipes)
         {
-            <partial name="_PostCard" model="post" />
+            <partial name="_PostCard" model="recipe" />
         }
     </section>
 }

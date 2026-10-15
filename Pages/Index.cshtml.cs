@@ -8,14 +8,14 @@ namespace FamilyRecipes.Pages;
 
 public class IndexModel : PageModel
 {
-    private readonly IBlogRepository _repo;
-    public List<Post> Posts { get; private set; } = new();
-    public IndexModel(IBlogRepository repo) => _repo = repo;
+    private readonly IRecipeRepository _repo;
+    public List<Recipe> Recipes { get; private set; } = new();
+    public IndexModel(IRecipeRepository repo) => _repo = repo;
 
 
     public void OnGet()
     {
-        Posts = _repo.GetAll().ToList();
-        
+        Recipes = _repo.GetAll().ToList();
+
     }
 }

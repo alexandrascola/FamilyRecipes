@@ -1,14 +1,14 @@
-﻿@model FamilyRecipes.Models.Post
+﻿@model FamilyRecipes.Models.Recipe
 <article class="post-card">
     <header class="post-card__header">
         <h2 class="post-card__title">
-            <a asp-page="/Details" asp-route-id="@Model.Id">@Model.Title</a>
+            <a asp-page="/Details" asp-route-id="@Model.Id">@Model.Name</a>
         </h2>
         <small class="post-card__date">@Model.CreatedUtc.ToLocalTime()</small>
         </header>
 
         <p class="post-card__excerpt">
-            @((Model.Body?.Length ?? 0) > 160 ? Model.Body.Substring(0, 160) + "..." : Model.Body)
+            @(Model.Instructions.Length > 160 ? Model.Instructions.Substring(0, 160) + "..." : Model.Instructions)
         </p>
         <a class="post-card__more" asp-page="/Details" asp-route-id="@Model.Id">ReadMore</a>
         <hr />

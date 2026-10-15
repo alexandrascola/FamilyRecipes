@@ -9,8 +9,8 @@ namespace FamilyRecipes.Pages
 {
     public class CreateModel : PageModel
     {
-        private readonly IBlogRepository _repo;
-        public CreateModel(IBlogRepository repo) => _repo = repo;
+        private readonly IRecipeRepository _repo;
+        public CreateModel(IRecipeRepository repo) => _repo = repo;
 
         [BindProperty]
         public InputModel Form { get; set; } = new();
@@ -19,12 +19,14 @@ namespace FamilyRecipes.Pages
 
         public class InputModel
         {
-
             [Required, StringLength(100)]
-            public string Title { get; set; } = string.Empty;
+            public string Name { get; set; } = string.Empty;
 
             [Required]
-            public string Body { get; set; } = string.Empty;
+            public string Ingredients { get; set; } = string.Empty;
+
+            [Required]
+            public string Instructions { get; set; } = string.Empty;
         }
         
         public void OnGet()
@@ -38,16 +40,17 @@ namespace FamilyRecipes.Pages
                 return Page();
             }
 
-            var post = new Post
+            var recipe = new Recipe
             {
-                Title = Form.Title.Trim(),
-                Body = Form.Body.Trim()
+                Name = Form.Name.Trim(),
+                Ingredients = Form.Ingredients.Trim(),
+                Instructions = Form.Instructions.Trim()
             };
 
-            _repo.Add(post);
+            _repo.Add(recipe);
             _repo.Save(); //does nothing on RAM, persists for json
 
-            return RedirectToPage("/Details", new { id = post.Id });
+            return RedirectToPage("/Details", new { id = recipe.Id });
 
         }
     }
