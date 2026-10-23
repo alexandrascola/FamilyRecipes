@@ -1,0 +1,15 @@
+﻿@model FamilyRecipes.Models.Recipe
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<h1>@Model.Name</h1>
+
+<h2>Ingredients</h2>
+<div>@Model.Ingredients</div>
+
+<h2>Instructions</h2>
+<div>@Model.Instructions</div>
+
+<p><a asp-action="Index">Back to Recipes List</a></p>

@@ -6,7 +6,9 @@ using FamilyRecipes.Middleware;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages(); //razor pages
+builder.Services.AddControllersWithViews(); //mvc
+
 
 //Choose which repo to use by swapping the type
 builder.Services.AddSingleton<IRecipeRepository, JsonRecipeRepository>(); //stores in a JSON file, will persist when app is restarted
@@ -35,6 +37,10 @@ app.UseAuthorization();
 app.MapStaticAssets();
 app.MapRazorPages()
    .WithStaticAssets();
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller}/{action=Index}/{id?}")
+    .WithStaticAssets();
 
 //Health endpoint returns the app version/status
 app.MapGet("/health", () =>
