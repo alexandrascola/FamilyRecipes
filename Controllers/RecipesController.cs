@@ -34,5 +34,30 @@ namespace FamilyRecipes.Controllers
 
             return View(recipe);
         }
+        
+        //Create Method
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Recipe recipe)
+        {
+            //Validate the model
+            if (!ModelState.IsValid)
+            {
+                return View(recipe);
+            }
+
+            //Save the recipe to JSON
+            _repo.Add(recipe);
+
+            //Return to the index page
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
+   
