@@ -8,7 +8,7 @@
 
 @if (Model.Recipes.Count == 0)
 {
-    <p>No recipes yet. <a asp-page="/Create">Create the first one!</a></p>
+    <p>No recipes yet. <a asp-controller="Recipes" asp-action="Create">Create the first one!</a></p>
 }
 else
 {

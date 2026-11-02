@@ -1,4 +1,7 @@
 ﻿@model FamilyRecipes.Models.Recipe
+@using Microsoft.Extensions.Options
+@using FamilyRecipes.Options
+@inject IOptions<SiteOptions> Site
 
 @{
     ViewData["Title"] = Model.Name;
@@ -7,9 +10,27 @@
 <h1>@Model.Name</h1>
 
 <h2>Ingredients</h2>
-<div>@Model.Ingredients</div>
+<div style="white-space: pre-line;">@Model.Ingredients</div>
 
 <h2>Instructions</h2>
-<div>@Model.Instructions</div>
+<div style="white-space: pre-line;">@Model.Instructions</div>
 
 <p><a asp-action="Index">Back to Recipes List</a></p>
+@if (Site.Value.EnableComments)
+{
+    <section class="comments">
+        <h2>Leave a comment</h2>
+        <form method="post">
+            <div class="form-row">
+                <label for="comment">Comment</label>
+                <textarea id="comment" name="comment" rows="4"></textarea>
+            </div>
+            <button type="submit" disabled>Post</button>
+            <p class="meta">Comments are enabled but will not be saved.</p>
+        </form>
+    </section>
+}
+else
+{
+    <p class="meta">Comments are disabled by configuration.</p>
+}
