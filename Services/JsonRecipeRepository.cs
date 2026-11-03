@@ -58,6 +58,45 @@ namespace FamilyRecipes.Services
 
         }
 
+        //Update Method
+        public bool Update(Recipe recipe)
+        {
+            lock (_lock)
+            {
+                var existing = _recipes.FirstOrDefault(p => p.Id == recipe.Id);
+
+                if (existing == null)
+                {
+                    return false;
+                }
+
+                existing.Name = recipe.Name;
+                existing.Ingredients = recipe.Ingredients;
+                existing.Instructions = recipe.Instructions;
+
+                SaveToDisk();
+                return true;
+            }
+        }
+
+        //Delete Method
+        public bool Delete(int id)
+        {
+            lock (_lock)
+            {
+                var existing = _recipes.FirstOrDefault(p => p.Id == id);
+
+                if (existing == null)
+                {
+                    return false;
+                }
+
+                _recipes.Remove(existing);
+                SaveToDisk();
+                return true;
+            }
+        }
+
         //Save Method
         public void Save()
         {

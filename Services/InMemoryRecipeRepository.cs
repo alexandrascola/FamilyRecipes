@@ -17,6 +17,35 @@ namespace FamilyRecipes.Services
             recipe.CreatedUtc = DateTime.UtcNow;
             _posts.Add(recipe);
         }
+
+        public bool Update(Recipe recipe)
+        {
+            var existing = _posts.FirstOrDefault(p => p.Id == recipe.Id);
+
+            if (existing == null)
+            {
+                return false;
+            }
+
+            existing.Name = recipe.Name;
+            existing.Ingredients = recipe.Ingredients;
+            existing.Instructions = recipe.Instructions;
+
+            return true;
+        }
+
+        public bool Delete(int id)
+        {
+            var existing = _posts.FirstOrDefault(p => p.Id == id);
+
+            if (existing == null)
+            {
+                return false;
+            }
+
+            _posts.Remove(existing);
+            return true;
+        }
         public void Save() {  /*unusable for storing in RAM */}
     }
 }

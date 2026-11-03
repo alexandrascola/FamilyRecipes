@@ -7,6 +7,8 @@ namespace FamilyRecipes.Services
         IEnumerable<Recipe> GetAll();
         Recipe? GetById(int id);
         void Add(Recipe recipe);
+        bool Update(Recipe recipe);
+        bool Delete(int id);
         void Save();
     }
 }

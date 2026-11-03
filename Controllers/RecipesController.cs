@@ -58,6 +58,70 @@ namespace FamilyRecipes.Controllers
             //Return to the index page
             return RedirectToAction(nameof(Index));
         }
+
+        //Edit Method
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var recipe = _repo.GetById(id);
+
+            if (recipe == null)
+            {
+                return NotFound();
+            }
+
+            return View(recipe);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, Recipe recipe)
+        {
+            if (id != recipe.Id)
+            {
+                return NotFound();
+            }
+
+            //Validate the model
+            if (!ModelState.IsValid)
+            {
+                return View(recipe);
+            }
+
+            //Save changes to JSON
+            if (!_repo.Update(recipe))
+            {
+                return NotFound();
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+        //Delete Method
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var recipe = _repo.GetById(id);
+
+            if (recipe == null)
+            {
+                return NotFound();
+            }
+
+            return View(recipe);
+        }
+
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            //Delete the recipe and save to JSON
+            if (!_repo.Delete(id))
+            {
+                return NotFound();
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
-   

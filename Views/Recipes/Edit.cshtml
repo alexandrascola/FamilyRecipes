@@ -1,0 +1,34 @@
+﻿@model FamilyRecipes.Models.Recipe
+
+@{
+    ViewData["Title"] = "Edit Recipe";
+}
+
+<h1>Edit Recipe</h1>
+
+<form asp-action="Edit" asp-route-id="@Model.Id" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div>
+        <label asp-for="Name"></label>
+        <input asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+
+    <div>
+        <label asp-for="Ingredients"></label>
+        <p>Enter one ingredient per line.</p>
+        <textarea asp-for="Ingredients" rows="8"></textarea>
+        <span asp-validation-for="Ingredients"></span>
+    </div>
+
+    <div>
+        <label asp-for="Instructions"></label>
+        <textarea asp-for="Instructions" rows="8"></textarea>
+        <span asp-validation-for="Instructions"></span>
+    </div>
+
+    <button type="submit">Save Changes</button>
+</form>
+
+<p><a asp-action="Index">Back to Recipes List</a></p>
