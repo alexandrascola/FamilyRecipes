@@ -1,3 +1,7 @@
+using FamilyRecipes.Models;
+using System.Text.Json;
+using System.Security.Cryptography;
+using System.Text;
 using FamilyRecipes.Services;
 using FamilyRecipes.Options;
 using FamilyRecipes.Middleware;
@@ -8,6 +12,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages(); //razor pages
 builder.Services.AddControllersWithViews(); //mvc
+//Add cookie authentication
+builder.Services.AddAuthentication("Cookies")
+    .AddCookie("Cookies", options =>
+    {
+        options.LoginPath = "/Account/Login";
+    }); //cookie auth for login
 
 
 //Choose which repo to use by swapping the type
@@ -31,7 +41,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();
@@ -57,5 +67,30 @@ app.MapGet("/api/recipes", (IRecipeRepository repo) =>
 {
     return Results.Json(repo.GetAll());
 });
+
+
+
+
+//the first user
+var dataDir = Path.Combine(app.Environment.ContentRootPath, "data");
+var usersFile = Path.Combine(dataDir, "users.json");
+Directory.CreateDirectory(dataDir);
+
+//Create the first user only if the file does NOT exist
+if (!File.Exists(usersFile))
+{
+    var hash = Convert.ToHexString(
+        SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes("Password123")));
+
+    var user = new[]
+    {
+        new User { Username = "admin", PasswordHash = hash }
+    };
+
+    File.WriteAllText(usersFile, JsonSerializer.Serialize(
+        user, new JsonSerializerOptions { WriteIndented = true }));
+}
+
+
 
 app.Run();
