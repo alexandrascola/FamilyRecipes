@@ -20,5 +20,7 @@ namespace FamilyRecipes.Models
 
 
         public DateTime CreatedUtc { get; set; } = DateTime.UtcNow;
+
+        public string? ImagePath { get; set; }
     }
 }

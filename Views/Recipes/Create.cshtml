@@ -6,7 +6,7 @@
 
 <h1>New Recipe</h1>
 
-<form asp-action="Create" method="post">
+<form asp-action="Create" method="post" enctype="multipart/form-data">
     <div>
         <label asp-for="Name"></label>
         <input asp-for="Name" />
@@ -24,6 +24,13 @@
         <label asp-for="Instructions"></label>
         <textarea asp-for="Instructions" rows="8"></textarea>
         <span asp-validation-for="Instructions"></span>
+    </div>
+
+    <div>
+        <label for="image">Recipe image (optional)</label>
+        <p>Choose a .jpg or .png file under 2 MB.</p>
+        <input type="file" id="image" name="image" accept=".jpg,.png" />
+        @Html.ValidationMessage("image") @* Displays image upload errors *@
     </div>
 
     <button type="submit">Save Recipe</button>

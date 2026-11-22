@@ -12,5 +12,13 @@
     "ingredients": "Celery\r\nPeanut Butter\r\nRaisins",
     "instructions": "Spread PB inside celery.\r\nStick raisins to PB.\r\nBring napkins!",
     "createdUtc": "2026-10-30T11:50:27.5924181Z"
+  },
+  {
+    "id": 3,
+    "name": "upload image test",
+    "ingredients": "testing image after edit",
+    "instructions": "testing image after edit",
+    "createdUtc": "2026-11-22T10:51:07.6086847Z",
+    "imagePath": "/uploads/f65e9cc032684cc5bdd6f376457f6847.png"
   }
 ]
