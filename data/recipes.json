@@ -11,7 +11,8 @@
     "name": "Ants on a Log",
     "ingredients": "Celery\r\nPeanut Butter\r\nRaisins",
     "instructions": "Spread PB inside celery.\r\nStick raisins to PB.\r\nBring napkins!",
-    "createdUtc": "2026-10-30T11:50:27.5924181Z"
+    "createdUtc": "2026-10-30T11:50:27.5924181Z",
+    "imagePath": "/uploads/8fef050930734742b260590aa4a815ec.png"
   },
   {
     "id": 3,
@@ -20,5 +21,12 @@
     "instructions": "testing image after edit",
     "createdUtc": "2026-11-22T10:51:07.6086847Z",
     "imagePath": "/uploads/f65e9cc032684cc5bdd6f376457f6847.png"
+  },
+  {
+    "id": 4,
+    "name": "Turkey BLT Burgers",
+    "ingredients": "Ground turkey\r\nBacon\r\nChives\r\nAvocado\r\nBrioche buns",
+    "instructions": "Chop chives and cooked bacon. Mix in bowl with turkey meat. Make into patties. Cook patties until fully cooked. \r\nToast buns.",
+    "createdUtc": "2026-11-23T10:34:23.3942919Z"
   }
 ]

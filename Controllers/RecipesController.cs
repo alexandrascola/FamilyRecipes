@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using FamilyRecipes.Models;
 using FamilyRecipes.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FamilyRecipes.Controllers
 {
@@ -23,7 +24,9 @@ namespace FamilyRecipes.Controllers
         //Index Method
         public IActionResult Index()
         {
-            var recipes = _repo.GetAll();
+            var recipes = _repo.GetAll()
+                .OrderBy(recipe => recipe.CreatedUtc)
+                .ToList();
             return View(recipes);
         }
 
@@ -41,20 +44,22 @@ namespace FamilyRecipes.Controllers
 
             return View(recipe);
         }
-        
+
 
 
         //Create Method
+        [Authorize]
         [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
-       
+
 
 
         //Edit Method
+        [Authorize]
         [HttpGet]
         public IActionResult Edit(int id)
         {
@@ -71,6 +76,7 @@ namespace FamilyRecipes.Controllers
 
 
         //Post Method
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Recipe recipe, IFormFile? image)
@@ -131,19 +137,69 @@ namespace FamilyRecipes.Controllers
         }
 
         //Save recipe edits
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, Recipe recipe)
+        public async Task<IActionResult> Edit(int id, Recipe recipe, IFormFile? image)
         {
             if (id != recipe.Id)
             {
                 return NotFound();
             }
 
-            //Validate the model
+            var existing = _repo.GetById(id);
+
+            if (existing == null)
+            {
+                return NotFound();
+            }
+
+            //Keep the current image unless a new one is uploaded
+            recipe.ImagePath = existing.ImagePath;
+
+            //Validate the image if one was selected
+            if (image != null)
+            {
+                if (image.Length == 0)
+                {
+                    ModelState.AddModelError("image", "Please choose a non-empty image file.");
+                }
+
+                if (image.Length >= MaxFileSizeBytes)
+                {
+                    ModelState.AddModelError("image", "Image must be less than 2 MB.");
+                }
+
+                var extension = Path.GetExtension(image.FileName).ToLowerInvariant();
+
+                if (extension != ".jpg" && extension != ".png")
+                {
+                    ModelState.AddModelError("image", "Only .jpg and .png files are allowed.");
+                }
+            }
+
+            //Validate the model before saving anything
             if (!ModelState.IsValid)
             {
                 return View(recipe);
+            }
+
+            //Save the image if one was selected
+            if (image != null)
+            {
+                var uploadsPath = Path.Combine(_env.WebRootPath, "uploads");
+                Directory.CreateDirectory(uploadsPath);
+
+                var extension = Path.GetExtension(image.FileName).ToLowerInvariant();
+                var fileName = $"{Guid.NewGuid():N}{extension}";
+                var filePath = Path.Combine(uploadsPath, fileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await image.CopyToAsync(stream);
+                }
+
+                recipe.ImagePath = $"/uploads/{fileName}";
             }
 
             //Save changes to JSON
@@ -158,6 +214,7 @@ namespace FamilyRecipes.Controllers
 
 
         //Delete Method
+        [Authorize]
         [HttpGet]
         public IActionResult Delete(int id)
         {
@@ -171,6 +228,7 @@ namespace FamilyRecipes.Controllers
             return View(recipe);
         }
 
+        [Authorize]
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]

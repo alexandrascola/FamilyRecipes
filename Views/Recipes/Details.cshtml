@@ -7,40 +7,48 @@
     ViewData["Title"] = Model.Name;
 }
 
-<h1>@Model.Name</h1>
+<div class="recipe-details">
+    <div class="recipe-header">
+        <h1>@Model.Name</h1>
 
-@if (!string.IsNullOrWhiteSpace(Model.ImagePath))
-{
-    <img src="@Model.ImagePath"
-         alt="@Model.Name"
-         style="max-width: 100%; max-height: 300px;" />
-}
+        @if (!string.IsNullOrWhiteSpace(Model.ImagePath))
+        {
+            <img src="@Model.ImagePath"
+                 alt="@Model.Name"
+                 style="max-width: 100%; max-height: 300px;" />
+        }
+    </div>
 
-
-<h2>Ingredients</h2>
-<div style="white-space: pre-line;">@Model.Ingredients</div>
-
-
-<h2>Instructions</h2>
-<div style="white-space: pre-line;">@Model.Instructions</div>
-
-
-<p><a asp-action="Index">Back to Recipes List</a></p>
-@if (Site.Value.EnableComments)
-{
-    <section class="comments">
-        <h2>Leave a comment</h2>
-        <form method="post">
-            <div class="form-row">
-                <label for="comment">Comment</label>
-                <textarea id="comment" name="comment" rows="4"></textarea>
-            </div>
-            <button type="submit" disabled>Post</button>
-            <p class="meta">Comments are enabled but will not be saved.</p>
-        </form>
+    <section class="recipe-section">
+        <h2>Ingredients</h2>
+        <div class="recipe-content">@Model.Ingredients</div>
     </section>
-}
-else
-{
-    <p class="meta">Comments are disabled by configuration.</p>
-}
+
+    <section class="recipe-section">
+        <h2>Instructions</h2>
+        <div class="recipe-content">@Model.Instructions</div>
+    </section>
+
+    <p class="recipe-back-link">
+        <a asp-action="Index">Back to Recipes List</a>
+    </p>
+
+    @if (Site.Value.EnableComments)
+    {
+        <section class="comments">
+            <h2>Leave a comment</h2>
+            <form method="post">
+                <div class="form-row">
+                    <label for="comment">Comment</label>
+                    <textarea id="comment" name="comment" rows="4"></textarea>
+                </div>
+                <button type="submit" disabled>Post</button>
+                <p class="meta">Comments are enabled but will not be saved.</p>
+            </form>
+        </section>
+    }
+    else
+    {
+        <p class="meta">Comments are disabled by configuration.</p>
+    }
+</div>

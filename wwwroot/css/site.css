@@ -1,12 +1,7 @@
 html {
-  font-size: 14px;
+    font-size: 16px;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
@@ -28,4 +23,195 @@ body {
 
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
+}
+
+
+
+
+
+/* Readable text and heading sizes */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+/* Keep form text consistent with the page */
+input,
+textarea,
+button {
+    font: inherit;
+}
+
+
+
+
+
+
+/* Space between form fields */
+main form > div {
+    margin-bottom: 1rem;
+}
+
+/* Place labels above their fields */
+main form label {
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+/* Make text fields a comfortable width */
+main form input[type="text"],
+main form input[type="password"],
+main form textarea {
+    display: block;
+    width: 100%;
+    max-width: 600px;
+    padding: 0.5rem;
+    box-sizing: border-box;
+}
+
+/* Allow text areas to resize vertically */
+main form textarea {
+    resize: vertical;
+}
+
+/* Display validation errors below fields */
+main form .field-validation-error {
+    display: block;
+    color: #b00020;
+    margin-top: 0.25rem;
+}
+
+/* Give buttons comfortable spacing */
+main form button {
+    padding: 0.5rem 1rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+
+/* Style the three main labels on the Create Recipe page */
+.recipe-form label[for="Name"],
+.recipe-form label[for="Ingredients"],
+.recipe-form label[for="Instructions"] {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #17365d;
+}
+
+/* Emphasize the ingredient hint without changing its size */
+.recipe-form .ingredient-hint {
+    font-weight: bold;
+    font-style: italic;
+}
+
+/* Match the image label size and weight, keeping it black */
+.recipe-form label[for="image"] {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: black;
+}
+
+
+
+/* Highlight enabled buttons on hover and keyboard focus */
+button:not(:disabled):hover,
+button:not(:disabled):focus-visible,
+input[type="submit"]:not(:disabled):hover,
+input[type="submit"]:not(:disabled):focus-visible {
+    background-color: #17365d;
+    color: white;
+    cursor: pointer;
+}
+
+/* Recipe name */
+.recipe-details .recipe-header h1 {
+    font-family: "Lucida Calligraphy", cursive;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #003153;
+    margin: 0 0 1rem;
+}
+
+/* Equal spacing between the main recipe sections */
+.recipe-details .recipe-header,
+.recipe-details .recipe-section {
+    margin-bottom: 2rem;
+}
+
+    /* Ingredients and Instructions headings */
+    .recipe-details .recipe-section h2 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-decoration: underline;
+        color: #17365d;
+        margin: 0 0 0.75rem;
+    }
+
+/* Recipe text boxes, preserving entered line breaks */
+.recipe-details .recipe-content {
+    background-color: #E2F9D9;
+    padding: 1rem;
+    white-space: pre-line;
+    overflow-wrap: break-word;
+}
+
+/* Extra space between the back link and comments */
+.recipe-details .recipe-back-link {
+    margin-bottom: 3rem;
+}
+
+/* Comment heading and label sizes */
+.recipe-details .comments h2 {
+    font-size: 1.25rem;
+}
+
+.recipe-details .comments label {
+    font-size: 1rem;
+}
+
+
+/* Homepage title banner */
+.home-banner {
+    font-family: "Lucida Calligraphy", cursive;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #003153;
+    text-align: center;
+    background-color: #CAF1DE;
+    padding: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+/* ReadMore link color */
+.post-card__more {
+    color: #17365d;
+}
+
+/* Recipes list heading */
+.recipes-title {
+    font-family: "Lucida Calligraphy", cursive;
+    color: #003153;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Background box around the recipes list */
+.recipes-list-box {
+    background-color: #E2F9D9;
+    padding: 1rem;
+}
+
+/* Create and Edit page headings */
+.recipe-form-title {
+    font-family: "Lucida Calligraphy", cursive;
+    color: #003153;
+    font-weight: bold;
 }

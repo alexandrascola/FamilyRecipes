@@ -4,9 +4,9 @@
     ViewData["Title"] = "Edit Recipe";
 }
 
-<h1>Edit Recipe</h1>
+<h1 class="recipe-form-title">Edit Recipe</h1>
 
-<form asp-action="Edit" asp-route-id="@Model.Id" method="post">
+<form asp-action="Edit" asp-route-id="@Model.Id" method="post" enctype="multipart/form-data" class="recipe-form">
     <input type="hidden" asp-for="Id" />
 
     <div>
@@ -17,15 +17,23 @@
 
     <div>
         <label asp-for="Ingredients"></label>
-        <p>Enter one ingredient per line.</p>
-        <textarea asp-for="Ingredients" rows="8"></textarea>
+        <p class="ingredient-hint">Enter one ingredient per line.</p>
+        <textarea asp-for="Ingredients" rows="5"></textarea>
         <span asp-validation-for="Ingredients"></span>
     </div>
 
     <div>
         <label asp-for="Instructions"></label>
-        <textarea asp-for="Instructions" rows="8"></textarea>
+        <textarea asp-for="Instructions" rows="5"></textarea>
         <span asp-validation-for="Instructions"></span>
+    </div>
+
+    <div>
+        <label for="image">Recipe image (optional)</label>
+        <p>Choose a .jpg or .png file under 2 MB. Leave blank to keep the current image.</p>
+        <input type="file" id="image" name="image" accept=".jpg,.png" />
+        @Html.ValidationMessage("image")
+        @* Displays image upload errors *@
     </div>
 
     <button type="submit">Save Changes</button>

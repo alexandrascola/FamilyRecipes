@@ -4,9 +4,9 @@
     ViewData["Title"] = "New Recipe";
 }
 
-<h1>New Recipe</h1>
+<h1 class="recipe-form-title">New Recipe</h1>
 
-<form asp-action="Create" method="post" enctype="multipart/form-data">
+<form asp-action="Create" method="post" enctype="multipart/form-data" class="recipe-form">
     <div>
         <label asp-for="Name"></label>
         <input asp-for="Name" />
@@ -15,14 +15,14 @@
 
     <div>
         <label asp-for="Ingredients"></label>
-        <p>Enter one ingredient per line.</p>
-        <textarea asp-for="Ingredients" rows="8"></textarea>
+        <p class="ingredient-hint">Enter one ingredient per line.</p>
+        <textarea asp-for="Ingredients" rows="5"></textarea>
         <span asp-validation-for="Ingredients"></span>
     </div>
 
     <div>
         <label asp-for="Instructions"></label>
-        <textarea asp-for="Instructions" rows="8"></textarea>
+        <textarea asp-for="Instructions" rows="5"></textarea>
         <span asp-validation-for="Instructions"></span>
     </div>
 

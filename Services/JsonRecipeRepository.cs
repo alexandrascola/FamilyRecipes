@@ -73,6 +73,7 @@ namespace FamilyRecipes.Services
                 existing.Name = recipe.Name;
                 existing.Ingredients = recipe.Ingredients;
                 existing.Instructions = recipe.Instructions;
+                existing.ImagePath = recipe.ImagePath;
 
                 SaveToDisk();
                 return true;
